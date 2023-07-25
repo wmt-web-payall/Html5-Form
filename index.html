@@ -1,0 +1,263 @@
+<html>
+
+<head>
+
+    <title>Form</title>>
+</head>
+
+<style>
+    .input-class {
+        display: table;
+        clear: both;
+
+    }
+
+    .col-left {
+        float: left;
+        width: 30%;
+        margin-top: 3px;
+    }
+
+    .col-right {
+        float: right;
+        width: 70%;
+        margin-top: 16px;
+    }
+
+    body {
+        width: 500px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        margin-left: 15%;
+    }
+
+    /* Clear floats after the columns */
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+
+<body>
+    <form id="myForm" onsubmit="submit()">
+        <div style="background-color: #f2f2f2;">
+            <h2>Personal Information</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-left">
+                        <label for="fname">First name:</label>
+                    </div>
+                    <div class="col-right"><input type="text" id="fname" name="fname" required /><br /><br /></div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="lname">Last name:</label>
+                    </div>
+                    <div class="col-right"><input type="text" id="lname" name="lname" required /><br /><br /></div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="birthday">Birthday:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="date" id="birthday" name="birthday" /><br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="gender">Gender </label>
+                    </div>
+                    <div class="col-right">
+                        <select name="gender" id="gender">
+                            <option>Choose a Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <h2>Account Information</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-left">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="email" id="email" name="email" /><br /><br />
+                        <span id="errmessage" style="color:rgb(179, 169, 169)"> </span>
+
+                        <!-- <span>(Your email address will be your username)</span> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="confirmemail">Re-type Email:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="email" id="confirmemail" name="confirmemail" /><br /><br />
+
+                        <br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="password" id="password" name="password" /><br /><br />
+                        <span id="message" style="color:rgb(179, 169, 169)"> </span> <br><br>
+                        <!-- <span>(Min. 8 Characters, 1 number case-sensitive)</span> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="confirmpassword">Re-type Password:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="password" id="confirmpassword" name="confirmpassword" /><br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="security">Security Question:</label>
+                    </div>
+                    <div class="col-right">
+                        <select name="question" id="question">
+                            <option>Choose a Security Question</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <h2>Contact Information</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-left">
+
+                        <label for="address">Address:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="text" id="address" name="address" /><br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="city">City:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="city" id="city" name="city" /><br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+                        <label for="state">State:</label>
+                    </div>
+                    <div class="col-right">
+                        <select name="state" id="state">
+                            <option>Choose a State</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select><br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+
+                        <label for="city">Zip code:</label>
+                    </div>
+                    <div class="col-right" style="display: flex; gap: 5px;">
+                        <input type="number" id="zipcode" name="zipcode" style="width: 100px; height: 25px;" />
+                        <input type="number" placeholder="optional" style="width: 50px; height: 25px;">
+                        <br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-left">
+
+                        <label for="number">Phone:</label>
+                    </div>
+                    <div class="col-right">
+                        <input type="number" id="number" name="number" /><br /><br />
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <button type="submit" value="Submit">Submit</button>
+            </div>
+            <div>
+    </form>
+    <!-- <script src="./validation.js" ></script> -->
+    <!-- <script>
+        function submit(){
+    alert("form is submitted")
+  
+   
+}
+
+        </script> -->
+    <script>
+        const mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        const password = document.getElementById("password").value;
+        const confirmpassword = document.getElementById("confirmpassword").value;
+        const email = document.getElementById("email").value
+        const confirmemail = document.getElementById("confirmemail").value
+        document.getElementById("myForm").addEventListener("submit", function (e) {
+            console.log(e)
+            e.preventDefault();
+            alert("form submitted----")
+
+            if (password == "") {
+                document.getElementById("message").innerHTML = "**Fill the password please!";
+                return false;
+            }
+
+
+            if (password.length < 6) {
+                document.getElementById("message").innerHTML = "**Password length must be atleast 6 characters";
+                return false;
+            }
+
+
+            if (password.length > 15) {
+                document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";
+                return false;
+            }
+            if (password != confirmpassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+        })
+
+        document.getElementById("email").addEventListener("change", function (e) {
+            console.log("email validation")
+            if (mailformat.test(email)) {
+                return true
+            }
+            else {
+                document.getElementById("errmessage").innerHTML = "**Invalid email address";
+
+            }
+        })
+    </script>
+</body>
+
+</html>
