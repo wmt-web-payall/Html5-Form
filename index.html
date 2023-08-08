@@ -2,7 +2,154 @@
 
 <head>
 
-    <title>Form</title>>
+    <title>Form</title>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <link rel="stylesheet" href=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <!-- Popper JS -->
+        <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
+        </script>
+        <!-- Latest compiled JavaScript -->
+        <script src=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" >
+    </script>
+
+    <!-- jQuery form validation  -->
+     <script>
+
+        // validate first name 
+     $(document).ready(function () {
+            $("#firstname").keyup(function () {
+            $(this).css("background-color", "lightblue");
+            let usernameValue = $("#firstname").val();
+            if (usernameValue.length == "") {
+            $("#usercheck").show();
+            usernameError = false;
+            return false;
+            } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+            $("#usercheck").show();
+            $("#usercheck").html("**length of username must be between 3 and 10");
+            usernameError = false;
+            return false;
+            } else {
+            $("#usercheck").hide();
+            }
+       
+      });
+  });
+
+//   validate password 
+    $(document).ready(function () {
+            $("#password").keyup(function () {
+                $(this).css("background-color", "lightblue");
+                let passwordValue = $("#password").val();
+                if (passwordValue.length == "") {
+                $("#passcheck").show();
+                passwordError = false;
+                return false;
+                }
+                if (passwordValue.length < 3 || passwordValue.length > 10) {
+                $("#passcheck").show();
+                $("#passcheck").html(
+                    "**length of your password must be between 3 and 10"
+                );
+                $("#passcheck").css("color", "red");
+                passwordError = false;
+                return false;
+                } else {
+                $("#passcheck").hide();
+                }
+                
+      });
+  });
+
+//   validate confirm password 
+    $(document).ready(function () {
+            $("#confirmpassword").keyup(function () {
+                $(this).css("background-color", "lightblue");
+                let confirmPasswordValue = $("#confirmpassword").val();
+                let passwordValue = $("#password").val();
+                if (passwordValue != confirmPasswordValue) {
+                $("#conpasscheck").show();
+                $("#conpasscheck").html("**Password didn't Match");
+                $("#conpasscheck").css("color", "red");
+                confirmPasswordError = false;
+                return false;
+                } else {
+                $("#conpasscheck").hide();
+                
+                }
+            });
+  });
+
+        // validate email 
+        
+        $(document).ready(function () {
+            $("#email").blur(function () {
+            $(this).css("background-color", "blue");
+            let regex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+            let s = email.value;
+            if (regex.test(s)) {
+            $("emailvalid").hide();
+            emailError = true;
+            } else {
+                $("#emailvalid").html("**email must be valid");
+
+                emailError = false;
+            }
+      });
+  });
+
+//   confirm email 
+        $(document).ready(function () {
+            $("#confirmemail").blur(function () {
+            $(this).css("background-color", "lightblue");
+            let confirmemailvalue = confirmemail.value;
+            let prevEmail = $("#password").val();
+            if (prevEmail.match(confirmemailvalue)) {
+                $("#confemailvalid").hide();
+
+            
+            } else {
+                $("#confemailvalid").show();
+            $("#confemailvalid").html("**Email should be Match");
+            $("#confemailvalid").css("color", "red");
+            return false;
+            
+            
+            }
+      });
+  });
+
+
+//    submit validation 
+        $(document).ready(function () {
+            $("#submitbtn").click(function () {
+                $(this).css("background-color", "blue");
+                validateUsername();
+                validatePassword();
+                validateConfirmPassword();
+                validateEmail();
+                if (
+                usernameError == true &&
+                passwordError == true &&
+                confirmPasswordError == true &&
+                emailError == true
+                ) {
+                return true;
+                } else {
+                return false;
+                }
+            });
+  });
+  </script>
+
 </head>
 
 <style>
@@ -39,6 +186,9 @@
     }
 
 
+    .is-invalid{
+        color: red;
+    }
     .container {
         border-radius: 5px;
         background-color: #f2f2f2;
@@ -54,6 +204,8 @@
     }
 </style>
 
+
+
 <body>
     <form id="myForm" onsubmit="submit()">
         <div style="background-color: #f2f2f2;">
@@ -63,7 +215,12 @@
                     <div class="col-left">
                         <label for="fname">First name:</label>
                     </div>
-                    <div class="col-right"><input type="text" id="fname" name="fname" required /><br /><br /></div>
+                    <div class="col-right"><input type="text" id="firstname" name="fname" required /><br /><br />
+                        <h5 id="usercheck"
+                        style="color: red;">
+                       
+                    </h5>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-left">
@@ -84,11 +241,12 @@
                         <label for="gender">Gender </label>
                     </div>
                     <div class="col-right">
-                        <select name="gender" id="gender">
+                        <select name="gender" id="gender" required>
                             <option>Choose a Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
+                      
                     </div>
                 </div>
             </div>
@@ -102,6 +260,11 @@
                     </div>
                     <div class="col-right">
                         <input type="email" id="email" name="email" /><br /><br />
+                        <h5 id="emailvalid"
+                        style="color: red;">
+                        
+                    </h5>
+                        
                         <span id="errmessage" style="color:rgb(179, 169, 169)"> </span>
 
                         <!-- <span>(Your email address will be your username)</span> -->
@@ -113,7 +276,10 @@
                     </div>
                     <div class="col-right">
                         <input type="email" id="confirmemail" name="confirmemail" /><br /><br />
-
+                        <h5 id="confemailvalid"
+                        style="color: red;">
+                        
+                    </h5>
                         <br /><br />
                     </div>
                 </div>
@@ -122,7 +288,16 @@
                         <label for="password">Password</label>
                     </div>
                     <div class="col-right">
-                        <input type="password" id="password" name="password" /><br /><br />
+                    
+                        <!-- <input type="password"
+                               name="pass"
+                               id="password"
+                               class="form-control"> -->
+                        <input type="password" id="password" name="password" />
+                        <h5 id="passcheck"
+                        style="color: red;">
+                      
+                    </h5><br /><br />
                         <span id="message" style="color:rgb(179, 169, 169)"> </span> <br><br>
                         <!-- <span>(Min. 8 Characters, 1 number case-sensitive)</span> -->
                     </div>
@@ -132,7 +307,11 @@
                         <label for="confirmpassword">Re-type Password:</label>
                     </div>
                     <div class="col-right">
-                        <input type="password" id="confirmpassword" name="confirmpassword" /><br /><br />
+                        <input type="password" id="confirmpassword" name="confirmpassword" />
+                        <h5 id="conpasscheck"
+                        style="color: red;">
+                       
+                    </h5><br /><br />
                     </div>
                 </div>
                 <div class="row">
@@ -196,68 +375,16 @@
                         <label for="number">Phone:</label>
                     </div>
                     <div class="col-right">
-                        <input type="number" id="number" name="number" /><br /><br />
+                        <input type="number" id="number" name="number" required /><br /><br />
                     </div>
                 </div>
             </div>
             <div style="display: flex; justify-content: center;">
-                <button type="submit" value="Submit">Submit</button>
+                <button type="submit" id="submitbtn" value="Submit">Submit</button>
             </div>
             <div>
     </form>
     <!-- <script src="./validation.js" ></script> -->
-    <!-- <script>
-        function submit(){
-    alert("form is submitted")
-  
-   
-}
-
-        </script> -->
-    <script>
-        const mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        const password = document.getElementById("password").value;
-        const confirmpassword = document.getElementById("confirmpassword").value;
-        const email = document.getElementById("email").value
-        const confirmemail = document.getElementById("confirmemail").value
-        document.getElementById("myForm").addEventListener("submit", function (e) {
-            console.log(e)
-            e.preventDefault();
-            alert("form submitted----")
-
-            if (password == "") {
-                document.getElementById("message").innerHTML = "**Fill the password please!";
-                return false;
-            }
-
-
-            if (password.length < 6) {
-                document.getElementById("message").innerHTML = "**Password length must be atleast 6 characters";
-                return false;
-            }
-
-
-            if (password.length > 15) {
-                document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";
-                return false;
-            }
-            if (password != confirmpassword) {
-                alert("Passwords do not match.");
-                return false;
-            }
-        })
-
-        document.getElementById("email").addEventListener("change", function (e) {
-            console.log("email validation")
-            if (mailformat.test(email)) {
-                return true
-            }
-            else {
-                document.getElementById("errmessage").innerHTML = "**Invalid email address";
-
-            }
-        })
-    </script>
 </body>
 
 </html>
